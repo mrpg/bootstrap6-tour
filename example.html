@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Bootstrap 6 tour</title>
+
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex, nofollow">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="tour.css">
+    </head>
+    <body>
+        <main class="container py-12">
+            <h1 id="welcome">Bootstrap 6 tour</h1>
+            <p>A small guided tour with a spotlight and popovers.</p>
+            <button type="button" class="btn-solid theme-primary" id="start-tour">Start tour</button>
+        </main>
+
+        <script type="module" src="https://cdn.jsdelivr.net/npm/bootstrap@6.0.0-alpha.1/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="tour.js"></script>
+        <script>
+            document.getElementById("start-tour").addEventListener("click", () => {
+                Tour.start([
+                    {
+                        target: "#welcome",
+                        title: "Welcome",
+                        content: "Each step highlights an element and explains it in a popover.",
+                        placement: "bottom",
+                    },
+                    {
+                        target: "#start-tour",
+                        title: "Try again",
+                        content: "After finishing, use this button to restart the tour.",
+                        placement: "right",
+                    },
+                ]);
+            });
+        </script>
+    </body>
+</html>

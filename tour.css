@@ -1,0 +1,51 @@
+/*
+ * Copyright (c) 2026 Max R. P. Grossmann
+ * SPDX-License-Identifier: 0BSD
+ */
+
+/* Styles for tour.js: a transparent backdrop, a spotlight, and a popover positioned by the tour */
+
+/* Backdrop and spotlight sit right below Bootstrap’s popovers, above sticky, fixed, and drawer layers */
+.tour-backdrop {
+    inset: 0;
+    position: fixed;
+    z-index: calc(var(--bs-z-popover) - 2);
+}
+
+/* The huge shadow dims everything except the spotlight itself */
+.tour-spotlight {
+    border-radius: var(--bs-radius-5);
+    box-shadow: 0 0 0 200vmax rgb(0 0 0 / 0.55);
+    pointer-events: none;
+    position: absolute;
+    z-index: calc(var(--bs-z-popover) - 1);
+}
+
+/* Bootstrap’s .popover provides the look; tour.js sets top, left, and the arrow’s offset */
+.tour-popover {
+    --bs-popover-max-width: 21rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: min(var(--bs-popover-max-width), 100% - 2rem);
+}
+.tour-popover > .popover-arrow {
+    position: absolute;
+}
+
+/* Once the first step is in place, tour.js adds .tour-glide: from then on, spotlight and popover glide together */
+@media (prefers-reduced-motion: no-preference) {
+    .tour-spotlight,
+    .tour-popover {
+        --tour-glide: 0.5s ease;
+    }
+    .tour-spotlight.tour-glide {
+        transition: top var(--tour-glide), left var(--tour-glide), width var(--tour-glide), height var(--tour-glide);
+    }
+    .tour-popover.tour-glide {
+        transition: opacity var(--bs-popover-transition-duration) linear, top var(--tour-glide), left var(--tour-glide);
+    }
+    .tour-popover.tour-glide > .popover-arrow {
+        transition: top var(--tour-glide), left var(--tour-glide);
+    }
+}
